@@ -5,7 +5,7 @@ const registry = {
 
 export default (app, bootstrap) => {
   registry.app = app;
-  registry.state = bootstrap(actions);
+  registry.state = bootstrap();
 };
 
 export const wire = (callback) => (payload = null) =>

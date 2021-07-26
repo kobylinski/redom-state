@@ -1,10 +1,9 @@
 {
   "name": "redom-state",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "State for redom apps",
   "main": "dist/redom-state.js",
   "module": "dist/redom-state.es.js",
-  "jsnext:main": "dist/redom.es.js",
   "scripts": {
     "build-es": "rollup -c -n redom-state -f es -i esm/index.js -o dist/redom-state.es.js",
     "build-js": "rollup -c -n redom-state -f umd -i esm/index.js -o dist/redom-state.js",
@@ -15,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:kobylinski/redom-state.git"
+    "url": "git+https://github.com/kobylinski/redom-state.git"
   },
   "keywords": [
     "redom",
@@ -27,8 +26,8 @@
     "url": "https://github.com/kobylinski/redom-state/issues"
   },
   "devDependencies": {
-    "rollup": "~2.44.0",
-    "terser": "~5.6.1",
+    "rollup": "^2.54.0",
+    "terser": "^5.7.1",
     "@rollup/plugin-buble": "^0.21.3",
     "@rollup/plugin-node-resolve": "^13.0.4"
   },
