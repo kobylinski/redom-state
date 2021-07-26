@@ -1,0 +1,37 @@
+{
+  "name": "redom-state",
+  "version": "1.0.0",
+  "description": "State for redom apps",
+  "main": "dist/redom-state.js",
+  "module": "dist/redom-state.es.js",
+  "jsnext:main": "dist/redom.es.js",
+  "scripts": {
+    "build-es": "rollup -c -n redom-state -f es -i esm/index.js -o dist/redom-state.es.js",
+    "build-js": "rollup -c -n redom-state -f umd -i esm/index.js -o dist/redom-state.js",
+    "build": "npm run build-es && npm run build-js",
+    "minify": "npm run minify-js && npm run minify-es",
+    "minify-js": "terser dist/redom-state.js -cmo dist/redom-state.min.js",
+    "minify-es": "terser dist/redom-state.es.js -o dist/redom-state.es.min.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:kobylinski/redom-state.git"
+  },
+  "keywords": [
+    "redom",
+    "state"
+  ],
+  "author": "Marek Kobylinski",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kobylinski/redom-state/issues"
+  },
+  "devDependencies": {
+    "rollup": "~2.44.0",
+    "terser": "~5.6.1",
+    "@rollup/plugin-buble": "^0.21.3",
+    "@rollup/plugin-node-resolve": "^13.0.4"
+  },
+  "dependencies": {
+  }
+}
