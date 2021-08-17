@@ -1,6 +1,6 @@
 {
   "name": "redom-state",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "State for redom apps",
   "main": "dist/redom-state.js",
   "module": "dist/redom-state.es.js",
