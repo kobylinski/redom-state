@@ -1,5 +1,5 @@
 export default class RedomState {
-  constructor(app, bootstrap) {
+  constructor(app, bootstrap = () => ({})) {
     this.app = app;
     this.state = bootstrap();
     this.cache = new Map();
