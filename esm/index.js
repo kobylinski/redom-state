@@ -1,12 +1,12 @@
-const registry = {
-  state: {},
-  app: null,
-};
+import RedomState from "./RedomState";
+
+let defState;
 
 export default (app, bootstrap) => {
-  registry.app = app;
-  registry.state = bootstrap();
+  defState = new RedomState(app, bootstrap);
 };
 
-export const wire = (callback) => (payload = null) =>
-  window.requestAnimationFrame(() => registry.app.update((registry.state = callback(registry.state, payload))));
+const wire = (callback) => defState.wire(callback);
+const pick = (callback) => defState.pick(callback);
+
+export { wire, pick, RedomState };
