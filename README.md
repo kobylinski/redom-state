@@ -1,4 +1,4 @@
-# State management made for redom apps
+# State management made for [RE:DOM](https://github.com/redom/redom) apps
 
 ## Install
 
