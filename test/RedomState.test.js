@@ -9,10 +9,81 @@ beforeAll(() => {
   window.requestAnimationFrame = (cb) => cb();
 });
 
+const sleep = (ms, payload) =>
+  new Promise((done) => setTimeout(() => done(payload), ms));
+
 describe("RedomState", () => {
   test("init state", () => {
     const state = getState();
     expect(state.state.value).toEqual(1);
+  });
+
+  test("async bootstrap", () => {
+    expect.assertions(6);
+    return new Promise((done) => {
+      const state = getState(
+        {
+          counter: 0,
+          update(state) {
+            switch (this.counter++) {
+              case 0:
+                expect(state.state).toEqual("loading");
+                expect(state.progress).toEqual(0);
+                break;
+              case 1:
+                expect(state.progress).toEqual(66);
+                break;
+              case 2:
+                expect(state.progress).toEqual(100);
+                break;
+              default:
+                expect(state.state).toEqual("done");
+                expect(state.progress).toEqual(100);
+                done();
+                break;
+            }
+          },
+        },
+        () => [
+          { state: "loading", progress: 0 },
+          sleep(100, { progress: 66 }),
+          sleep(50, { progress: 100 }),
+          { state: "done" },
+        ]
+      );
+    });
+  });
+
+  test("generator bootstrap", () => {
+    expect.assertions(5);
+    return new Promise((done) => {
+      getState(
+        {
+          counter: 0,
+          update(state) {
+            switch (this.counter++) {
+              case 0:
+                expect(state.state).toEqual("loading");
+                expect(state.progress).toEqual(0);
+                break;
+              case 1:
+                expect(state.progress).toEqual(50);
+                break;
+              default:
+                expect(state.state).toEqual("done");
+                expect(state.progress).toEqual(100);
+                done();
+                break;
+            }
+          },
+        },
+        async function* () {
+          yield { state: "loading", progress: 0 };
+          yield await sleep(100, { progress: 50 });
+          yield await sleep(100, { progress: 100, state: "done" });
+        }
+      );
+    });
   });
 
   test("wire", () => {

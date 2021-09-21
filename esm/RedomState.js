@@ -1,8 +1,22 @@
 export default class RedomState {
-  constructor(app, bootstrap = () => ({})) {
+  constructor(app, init = () => ({})) {
     this.app = app;
-    this.state = bootstrap();
     this.cache = new Map();
+    this.state = {};
+    this.bootstrap(init());
+  }
+
+  async bootstrap(state) {
+    if (
+      Array.isArray(state) ||
+      typeof state[Symbol.asyncIterator] !== "undefined"
+    ) {
+      for await (let stage of state) {
+        this.app.update((this.state = Object.assign(this.state, stage)));
+      }
+    } else {
+      this.state = state;
+    }
   }
 
   wire(fn) {
