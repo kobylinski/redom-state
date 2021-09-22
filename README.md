@@ -153,7 +153,7 @@ export {
 
 ## Example
 
-### Define app state
+### Define your component with state functions
 
 ```js
 // Counter.js
