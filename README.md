@@ -153,6 +153,8 @@ export {
 
 ## Example
 
+### Define app state
+
 ```js
 // Counter.js
 import {wire} from "redom-state";
@@ -185,7 +187,7 @@ export default class Counter {
 
 ```
 
-## Define your app class
+### Define your app class
 
 Reuse previously defined actions
 
@@ -211,7 +213,7 @@ export default class App {
 }
 ```
 
-## Bootstrap application
+### Bootstrap application
 
 ```js
 // bootstrap.js
