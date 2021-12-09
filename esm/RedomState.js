@@ -16,6 +16,9 @@ export default class RedomState {
       }
     } else {
       this.state = state;
+      if (this.app) {
+        this.app.update(state);
+      }
     }
   }
 
