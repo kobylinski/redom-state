@@ -1,9 +1,21 @@
 export default class RedomState {
-  constructor(app, init = () => ({})) {
+  constructor(app = null, init = () => ({})) {
     this.app = app;
     this.cache = new Map();
     this.state = {};
-    this.bootstrap(init());
+    this.init = init;
+
+    if (null !== app) {
+      this.bootstrap(init());
+    }
+  }
+
+  run(app, init = null) {
+    if (null !== app) {
+      this.app = app;
+      this.bootstrap(null === init ? this.init() : init());
+    }
+    return this.app;
   }
 
   async bootstrap(state) {
@@ -51,5 +63,14 @@ export default class RedomState {
       }
     }
     return (...args) => fn(this.state, ...args);
+  }
+
+  export() {
+    return {
+      wire: (fn) => this.wire(fn),
+      pick: (fn, cacheKey = false) => this.pick(fn, cacheKey),
+      run: (app, init = null) => this.run(app, init),
+      app: () => this.app,
+    };
   }
 }

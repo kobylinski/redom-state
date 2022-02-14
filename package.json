@@ -1,6 +1,6 @@
 {
   "name": "redom-state",
-  "version": "1.3.1",
+  "version": "1.4.0",
   "description": "State for redom apps",
   "main": "dist/redom-state.js",
   "module": "dist/redom-state.es.js",
@@ -30,7 +30,7 @@
   },
   "jest": {
     "verbose": true,
-    "testRegex": "/test/.*\\.js$",
+    "testRegex": "/test/.*\\.test\\.js$",
     "globals": {
       "window": {}
     }

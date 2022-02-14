@@ -140,15 +140,14 @@ const switchPage = pick((state, page) => {
 With helper function also state class is provided. You can define and expose your own state for app.
 
 ```js
-import { RedomState } from "redom-state"
+import { RedomState } from "redom-state";
 import { mount } from "redom";
-import App from "./App";
 
-const state = new RedomState( mount(document.body, new App()), () => ({ value: 0 }) );
-export {
-  wire: (fn) => state.wire( fn ),
-  pick: (fn, cache = false) => state.pick(fn, cache)
-}
+const state = new RedomState(null, () => ({
+  value: 0,
+}));
+
+export const { wire, pick, app, run } = state.export();
 ```
 
 ## Example
