@@ -13,7 +13,7 @@ export default class RedomState {
   run(app, init = null) {
     if (null !== app) {
       this.app = app;
-      this.bootstrap(null === init ? this.init() : init());
+      this.bootstrap(typeof init === "function" ? init() : this.init(init));
     }
     return this.app;
   }
